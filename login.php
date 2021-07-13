@@ -2,10 +2,10 @@
 
 require_once 'core/database.php';
 
-$conn = new Connection();
-
 if (isset($_POST['usuario']) && isset($_POST['password'])) {
     if (!empty($_POST['usuario']) && !empty($_POST['password'])) {
+        
+        $conn = new Connection();
         
         $usuario = $_POST['usuario'];
         $passwd = md5($_POST['password']);
