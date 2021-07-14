@@ -10,7 +10,7 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
         $usuario = $_POST['usuario'];
         $passwd = md5($_POST['password']);
 
-        $sql = "SELECT email_usr, pwd_usr FROM users WHERE email_usr = '$usuario' AND pwd_usr = '$passwd'";
+        $sql = "SELECT id_usr, email_usr, nom_usr, tel_usr, niv_usr, ubch_id FROM users WHERE email_usr = '$usuario' AND pwd_usr = '$passwd'";
 
         $json = array();
 
@@ -35,6 +35,8 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
             'message' => 'DATOS VACIO'
         );
         $jsonstring = json_encode($json);
+
+        echo $jsonstring;
     }
 } else {
     $json = array(
@@ -42,6 +44,8 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
         'message' => 'DATOS INEXISTENTES'
     );
     $jsonstring = json_encode($json);
+
+    echo $jsonstring;
 }
 
 ?>
