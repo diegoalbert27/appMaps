@@ -1,4 +1,5 @@
 <?php
+
 require_once 'core/database.php';
 
 session_start();
@@ -10,7 +11,7 @@ session_start();
 
 $session = $_SESSION['usr']['id_usr'];
 
-$sql = "SELECT cedula, nombres, apellidos, correo, celular, user_id, a.ubch_id, email_usr, nom_usr, ced_usr, tel_usr FROM electores a JOIN centros b JOIN users c WHERE a.user_id = $session AND a.ubch_id = b.id AND a.user_id = c.id_usr";
+$sql = "SELECT id_usr, email_usr, nom_usr, ced_usr, tel_usr, ubch_id, nombre, codigo FROM users a JOIN centros b WHERE supervisor = $session AND a.niv_usr = 5 AND a.ubch_id = b.id";
 
 $conn = new Connection();
 

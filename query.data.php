@@ -21,12 +21,12 @@ if (isset($_GET['cedula'])) {
 
         if (!empty($resp = json_decode($output))) {
             $json = array(
-                'status' => 0,
+                'estatus' => 0,
                 'message' => $resp
             );
         } else {
             $json = array(
-                'status' => 1,
+                'estatus' => 1,
                 'message' => 'ERROR'
             );
         }

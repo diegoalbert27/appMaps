@@ -52,7 +52,7 @@ class Connection {
             
             $stmt = $conexion->prepare($sql);
             
-            call_user_func_array(array($stmt, 'bind_param'), array_merge(array($param), $array));
+            @call_user_func_array(array($stmt, 'bind_param'), array_merge(array($param), $array));
 
             if (!$stmt->execute()) {
                 return false;

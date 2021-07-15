@@ -9,7 +9,7 @@ $conn = new Connection();
 $result = $conn->query($sql);
 
 $json = array(
-    'status' => 0,
+    'estatus' => 0,
     'message' => $result
 );
 

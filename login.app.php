@@ -4,13 +4,13 @@ require_once 'core/database.php';
 
 session_start();
 
-if (isset($_POST['usuario']) && isset($_POST['password'])) {
-    if (!empty($_POST['usuario']) && !empty($_POST['password'])) {
+if (isset($_GET['usuario']) && isset($_GET['password'])) {
+    if (!empty($_GET['usuario']) && !empty($_GET['password'])) {
         
         $conn = new Connection();
         
-        $usuario = $_POST['usuario'];
-        $passwd = md5($_POST['password']);
+        $usuario = $_GET['usuario'];
+        $passwd = md5($_GET['password']);
 
         $sql = "SELECT id_usr, email_usr, nom_usr, tel_usr, niv_usr, ubch_id, nombre, codigo FROM users a JOIN centros b WHERE a.email_usr = '$usuario' AND a.pwd_usr = '$passwd' AND a.ubch_id = b.id";
 
