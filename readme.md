@@ -19,7 +19,7 @@ parametros para consultar al usuario.
 
 http://appmaps.neoaplicaciones.com/src/query.data.php?cedula={value}
 
-## Dirección para guardar al movilizador dentro del sistema 
+## Direcciï¿½n para guardar al movilizador dentro del sistema 
 
 metodo: POST
 
@@ -39,7 +39,7 @@ metodo: GET
 
 http://appmaps.neoaplicaciones.com/src/list.manager.php
 
-no recibe ningún parametro.
+no recibe ningï¿½n parametro.
 
 ## Guardar un elector.
 
@@ -55,18 +55,28 @@ parametros a recibir.
 	- email
 	- celular
 
-## Listar electores por movilizador y centro de votación.
+## Listar electores por movilizador y centro de votaciï¿½n.
 
 http://appmaps.neoaplicaciones.com/src/list.php
 
 metodo: GET
 
-no recibe ningún parametro.
+no recibe ningï¿½n parametro.
 
-## Mostrar todos los centros de votación disponibles en el sistema
+## Mostrar todos los centros de votaciï¿½n disponibles en el sistema
 
 http://appmaps.neoaplicaciones.com/src/ubchcenter.php
 
 metodo: GET
 
-no recibe ningún parametro.
+no recibe ningï¿½n parametro.
+
+## Obtener movilizador o elector dependiendo de la cedula ya registrado.
+
+http://appmaps.neoaplicaciones.com/src/get.data.id.php?cedula={value}
+
+metodo: GET
+
+parametros a recibir
+
+	- cedula
