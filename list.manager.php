@@ -9,7 +9,11 @@ session_start();
 //     'id_usr' => 1
 // );
 
-$session = $_SESSION['usr']['id_usr'];
+$session = $_SESSION['usr'];
+
+foreach($session as $key => $fila){
+    $session = $fila['id_usr'];
+}
 
 $sql = "SELECT id_usr, email_usr, nom_usr, ced_usr, tel_usr, ubch_id, nombre, codigo FROM users a JOIN centros b WHERE supervisor = $session AND a.niv_usr = 5 AND a.ubch_id = b.id";
 

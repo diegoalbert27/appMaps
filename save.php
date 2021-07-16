@@ -20,8 +20,13 @@ if (isset($_POST['cedula']) && isset($_POST['nombres']) && isset($_POST['apellid
         $email = $_POST['email'];
         $celular = $_POST['celular'];
 
-        $ubch = $_SESSION['usr']['ubch_id'];
-        $usuario = $_SESSION['usr']['id_usr'];
+        $usuario = $_SESSION['usr'];
+        $ubch = null;
+        
+        foreach($usuario as $key => $fila){
+            $usuario = $fila['id_usr'];
+            $ubch = $fila['ubch_id'];
+        }
 
         $conn = new Connection();
 

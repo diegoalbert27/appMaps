@@ -8,7 +8,11 @@ session_start();
 //     'id_usr' => 1
 // );
 
-$session = $_SESSION['usr']['id_usr'];
+$session = $_SESSION['usr'];
+
+foreach($session as $key => $fila){
+    $session = $fila['id_usr'];
+}
 
 $sql = "SELECT cedula, nombres, apellidos, correo, celular, user_id, a.ubch_id, email_usr, nom_usr, ced_usr, tel_usr FROM electores a JOIN centros b JOIN users c WHERE a.user_id = $session AND a.ubch_id = b.id AND a.user_id = c.id_usr";
 

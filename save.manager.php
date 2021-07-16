@@ -20,9 +20,14 @@ if (isset($_POST['usuario'])) {
         $nombre = $_POST['nombre'];
         $telefono = $_POST['telefono'];
         $nivel = 5; // $_POST['nivel']
+
+        $session = $_SESSION['usr'];
+        $ubch = null;
         
-        $ubch = $_SESSION['usr']['ubch_id'];
-        $session = $_SESSION['usr']['id_usr'];
+        foreach($session as $key => $fila){
+            $session = $fila['id_usr'];
+            $ubch = $fila['ubch_id'];
+        }
 
         $conn = new Connection();
         
