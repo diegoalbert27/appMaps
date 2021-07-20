@@ -29,9 +29,15 @@ if (isset($_GET['cedula'])) {
         $json = array();
 
         if (!empty($data = $conn->query($queryUsers))) {
+
+            $user = $data[0]['id_usr'];
+        
+            $result = $conn->query("SELECT * FROM electores WHERE user_id = $user");
+
             $json = array(
                 'estatus' => 0,
-                'message' => $data
+                'message' => $data,
+                'electores' => $result
             );
         } else {
             if (!empty($data = $conn->query($queryElectores))) {

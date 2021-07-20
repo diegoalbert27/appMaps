@@ -1,41 +1,50 @@
 <?php
 
-if (isset($_GET['cedula'])) {
-    if (!empty($_GET['cedula'])) {
+function getPersona($cedula) {
+    $ch = curl_init();
 
-        $cedula = $_GET['cedula']; // 31303849
+    // set url
+    curl_setopt($ch, CURLOPT_URL, "http://neomaps.neoaplicaciones.com/api.php?key=Ap67pNeo&cedula=$cedula");
 
-        // create curl resource
-        $ch = curl_init();
+    //return the transfer as a string
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-        // set url
-        curl_setopt($ch, CURLOPT_URL, "http://neomaps.neoaplicaciones.com/api.php?key=Ap67pNeo&cedula=$cedula");
+    // // close curl resource to free up system resources
+    // curl_close($ch);
 
-        //return the transfer as a string
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    // $output contains the output string
+    return curl_exec($ch);
+}
 
-        // $output contains the output string
-        $output = curl_exec($ch);
+function getJson ($output, $json = array()) {
+    if (!empty($resp = json_decode($output))) {
+        $json = array(
+            'estatus' => 0,
+            'message' => $resp
+        );
+    } else {
+        $json = array(
+            'estatus' => 1,
+            'message' => 'ERROR'
+        );
+    }
 
-        $json = array();
+    return json_encode($json);
+}
 
-        if (!empty($resp = json_decode($output))) {
-            $json = array(
-                'estatus' => 0,
-                'message' => $resp
-            );
-        } else {
-            $json = array(
-                'estatus' => 1,
-                'message' => 'ERROR'
-            );
+function exec_data () {
+    if (isset($_GET['cedula'])) {
+        if (!empty($_GET['cedula'])) {
+    
+            $cedula = $_GET['cedula']; // 31303849
+    
+            $output = getPersona($cedula);
+    
+            $jsonstring = getJson($output);
+    
+            return $jsonstring;
         }
-
-        $jsonstring = json_encode($json);
-
-        // close curl resource to free up system resources
-        curl_close($ch);
-
-        echo $jsonstring;
     }
 }
+
+echo exec_data();
