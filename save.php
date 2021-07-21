@@ -2,37 +2,37 @@
 
 require_once 'core/database.php';
 
-session_start();
+// session_start();
 
 // $_SESSION['usr'] = array(
 //       'ubch_id' => 4,
 //       'id_usr' => 2
 // );
 
-if (isset($_POST['cedula']) && isset($_POST['nombres']) && isset($_POST['apellidos']) && isset($_POST['celular'])) {
-    if (!empty($_POST['cedula']) && !empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['celular'])) {
+if (isset($_POST['cedula']) && isset($_POST['nombres']) && isset($_POST['apellidos']) && isset($_POST['celular']) && isset($_POST['id']) && isset($_POST['ubch'])) {
+    if (!empty($_POST['cedula']) && !empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['celular']) && !empty($_POST['id']) && !empty($_POST['ubch'])) {
 
         $sqlInsert = "INSERT INTO electores (cedula, nombres, apellidos, correo, celular, user_id, ubch_id) VALUES (?,?,?,?,?,?,?)";
 
         $cedula = $_POST['cedula'];
         $nombres = $_POST['nombres'];
         $apellidos = $_POST['apellidos'];
-        $email = empty($_POST['correo']) ? ' ' : $_POST['correo'];
+        $email = !empty($_POST['correo']) ? $_POST['correo'] : '' ;
         $celular = $_POST['celular'];
 
-        $usuario = $_SESSION['usr'];
-        $ubch = null;
+        $usuario = $_POST['id']; //$_SESSION['usr']
+        $ubch = $_POST['ubch']; //null
 
-        foreach ($usuario as $key => $fila) {
-            $usuario = $fila['id_usr'];
-            $ubch = $fila['ubch_id'];
-        }
+        // foreach ($usuario as $key => $fila) {
+        //     $usuario = $fila['id_usr'];
+        //     $ubch = $fila['ubch_id'];
+        // }
 
         $conn = new Connection();
 
         $json = array();
 
-        if (empty($conn->query("SELECT id_usr FROM users WHERE ced_usr = '$cedula'"))) {
+        if (empty($conn->query("SELECT id_usr FROM users WHERE ced_usr = '$cedula' AND niv_usr = 1"))) {
 
             if (empty($conn->query("SELECT cedula FROM electores WHERE user_id IS NOT NULL AND cedula = $cedula"))) {
 

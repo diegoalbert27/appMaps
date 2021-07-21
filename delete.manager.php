@@ -27,7 +27,7 @@ if (isset($_GET['cedula'])) {
         if (!empty($result = $conn->query("SELECT id_usr FROM users WHERE id_usr = $session AND niv_usr = 10"))) {
             if (empty($conn->query("SELECT niv_usr FROM users WHERE ced_usr = $cedula AND niv_usr = 0"))) {
 
-                $sql = "UPDATE users SET niv_usr = 0 WHERE ced_usr = ? AND niv_usr = 5";
+                $sql = "UPDATE users SET niv_usr = 0 WHERE ced_usr = ? AND niv_usr = 1";
 
                 $result = $conn->insertData($sql, 'i', array($cedula));
 

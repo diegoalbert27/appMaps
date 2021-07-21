@@ -11,32 +11,37 @@ session_start();
 
 $session = $_SESSION['usr'];
 
-foreach($session as $key => $fila){
+foreach ($session as $key => $fila) {
     $session = $fila['id_usr'];
 }
 
-$sql = "SELECT id_usr, email_usr, nom_usr, ced_usr, tel_usr, ubch_id, nombre, codigo FROM users a JOIN centros b WHERE supervisor = $session AND a.niv_usr = 5 AND a.ubch_id = b.id";
+if (isset($_GET['nivel'])) {
+    if (!empty($_GET['nivel'])) {
 
-$conn = new Connection();
+        $nivel = $_GET['nivel'];
 
-$result = $conn->query($sql);
+        $sql = "SELECT id_usr, email_usr, nom_usr, ced_usr, tel_usr, ubch_id, nombre, codigo FROM users a JOIN centros b WHERE supervisor = $session AND a.niv_usr = $nivel AND a.ubch_id = b.id";
 
-$json = array();
+        $conn = new Connection();
 
-if (!empty($result)) {
-    $json = array(
-        'estatus' => 0,
-        'message' => $result
-    );
-} else {
-    $json = array(
-        'estatus' => 1,
-        'message' => 'VOID'
-    );
+        $result = $conn->query($sql);
+
+        $json = array();
+
+        if (!empty($result)) {
+            $json = array(
+                'estatus' => 0,
+                'message' => $result
+            );
+        } else {
+            $json = array(
+                'estatus' => 1,
+                'message' => 'VOID'
+            );
+        }
+
+        $jsonstring = json_encode($json);
+
+        echo $jsonstring;
+    }
 }
-
-$jsonstring = json_encode($json);
-
-echo $jsonstring;
-
-?>
